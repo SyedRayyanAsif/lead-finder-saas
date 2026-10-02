@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
-import { Link, useLocation } from 'react-router-dom'
+import { Link, useLocation, useNavigate } from 'react-router-dom'
+import { useAuth } from '../context/AuthContext.jsx'
 import Logo from './Logo.jsx'
 import Icon from './Icon.jsx'
 
@@ -12,6 +13,13 @@ const NAV_LINKS = [
 export default function Navbar() {
   const [open, setOpen] = useState(false)
   const location = useLocation()
+  const navigate = useNavigate()
+  const { user, loading, signOut } = useAuth()
+
+  async function handleLogout() {
+    await signOut()
+    navigate('/')
+  }
 
   // Close the mobile menu whenever the user navigates.
   useEffect(() => {
@@ -34,12 +42,28 @@ export default function Navbar() {
             </Link>
           ))}
           <div className="nav__auth">
-            <Link to="/login" className="nav__link">
-              Log in
-            </Link>
-            <Link to="/signup" className="btn btn--primary btn--sm">
-              Sign up
-            </Link>
+            {/* Render nothing while we check for an existing session, so the
+                buttons don't flash "Log in" for someone who's already in. */}
+            {!loading && user && (
+              <>
+                <Link to="/request" className="nav__link">
+                  My request
+                </Link>
+                <button type="button" className="btn btn--ghost btn--sm" onClick={handleLogout}>
+                  Log out
+                </button>
+              </>
+            )}
+            {!loading && !user && (
+              <>
+                <Link to="/login" className="nav__link">
+                  Log in
+                </Link>
+                <Link to="/signup" className="btn btn--primary btn--sm">
+                  Sign up
+                </Link>
+              </>
+            )}
           </div>
         </nav>
 

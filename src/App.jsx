@@ -3,7 +3,11 @@ import Navbar from './components/Navbar.jsx'
 import Footer from './components/Footer.jsx'
 import ScrollToHash from './components/ScrollToHash.jsx'
 import Landing from './pages/Landing.jsx'
-import ComingSoon from './pages/ComingSoon.jsx'
+import Login from './pages/Login.jsx'
+import Signup from './pages/Signup.jsx'
+import RequestPlaceholder from './pages/RequestPlaceholder.jsx'
+import ProtectedRoute from './components/ProtectedRoute.jsx'
+import NotFound from './pages/NotFound.jsx'
 
 export default function App() {
   return (
@@ -16,10 +20,17 @@ export default function App() {
       <main id="main">
         <Routes>
           <Route path="/" element={<Landing />} />
-          {/* Auth is the next build step – placeholders so the nav isn't dead. */}
-          <Route path="/login" element={<ComingSoon title="Log in" />} />
-          <Route path="/signup" element={<ComingSoon title="Sign up" />} />
-          <Route path="*" element={<ComingSoon title="Page not found" notFound />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/signup" element={<Signup />} />
+          <Route
+            path="/request"
+            element={
+              <ProtectedRoute>
+                <RequestPlaceholder />
+              </ProtectedRoute>
+            }
+          />
+          <Route path="*" element={<NotFound />} />
         </Routes>
       </main>
       <Footer />
