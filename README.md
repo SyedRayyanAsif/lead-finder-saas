@@ -48,3 +48,25 @@ This creates two tables:
    `https://YOUR-SITE/requests/<the request's id>`.
 
 Access rules are built in: customers can only create requests and see their own results; they can't edit anything or see anyone else's data.
+
+## Deploying to Netlify
+
+Build settings (command, output folder, Node version, SPA redirect) live in [`netlify.toml`](netlify.toml), so
+Netlify needs no manual build configuration.
+
+1. **Merge to `main`.** Netlify deploys your production branch (`main` by default).
+2. In Netlify: **Add new site → Import an existing project → GitHub** → pick this repository.
+   Leave the build settings as detected; they come from `netlify.toml`.
+3. **Site configuration → Environment variables** → add `VITE_SUPABASE_URL` and `VITE_SUPABASE_ANON_KEY`
+   (the same two values as in `.env.local`).
+   Vite bakes these into the site **at build time**, so after adding or changing them you must redeploy
+   (**Deploys → Trigger deploy → Clear cache and deploy site**). Until then the site shows
+   "Accounts are temporarily unavailable".
+4. In Supabase → **Authentication → URL Configuration**: set *Site URL* to your Netlify address and add
+   `https://YOUR-SITE.netlify.app/**` under *Redirect URLs* (and your custom domain, if you add one).
+5. **Smoke test** on the live site: sign up → confirm the email → submit a request → find it in the Supabase
+   `requests` table → add a lead, set the request to `completed` → reload *My requests* and check the results.
+
+`netlify.toml` exempts the two public Supabase variables from Netlify's secret scanner (it would otherwise fail
+the build, because Vite copies them into the public JavaScript). Never put the `service_role` key in a `VITE_`
+variable.
