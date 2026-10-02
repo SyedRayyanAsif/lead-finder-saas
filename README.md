@@ -13,8 +13,10 @@ npm run build                # production build into dist/
 ## Supabase setup (sign up / login)
 
 1. Create a free project at [supabase.com](https://supabase.com).
-2. **Project Settings → API**: copy the *Project URL* and the *anon public* key into `.env.local` as
-   `VITE_SUPABASE_URL` and `VITE_SUPABASE_ANON_KEY`. Never use the `service_role` key in the frontend.
+2. **Project Settings → API Keys**: copy the *Project URL* and the *Publishable key* (starts with `sb_publishable_`)
+   into `.env.local` as `VITE_SUPABASE_URL` and `VITE_SUPABASE_ANON_KEY`.
+   (Older projects call this the *anon* key; either works. The variable keeps the "ANON" name so existing setups don't break.)
+   Never use the *secret* key (`sb_secret_…`), the old `service_role` key, or your database password in the frontend.
 3. **Authentication → Providers**: make sure *Email* is enabled.
 4. **Authentication → URL Configuration**: set *Site URL* to your deployed address (e.g. your Netlify URL)
    and add these under *Redirect URLs*: `http://localhost:5173/**` and `https://YOUR-SITE.netlify.app/**`.
@@ -58,7 +60,7 @@ Netlify needs no manual build configuration.
 2. In Netlify: **Add new site → Import an existing project → GitHub** → pick this repository.
    Leave the build settings as detected; they come from `netlify.toml`.
 3. **Site configuration → Environment variables** → add `VITE_SUPABASE_URL` and `VITE_SUPABASE_ANON_KEY`
-   (the same two values as in `.env.local`).
+   (the same two values as in `.env.local`: the project URL and the *publishable* key).
    Vite bakes these into the site **at build time**, so after adding or changing them you must redeploy
    (**Deploys → Trigger deploy → Clear cache and deploy site**). Until then the site shows
    "Accounts are temporarily unavailable".
@@ -68,8 +70,8 @@ Netlify needs no manual build configuration.
    `requests` table → add a lead, set the request to `completed` → reload *My requests* and check the results.
 
 `netlify.toml` exempts the two public Supabase variables from Netlify's secret scanner (it would otherwise fail
-the build, because Vite copies them into the public JavaScript). Never put the `service_role` key in a `VITE_`
-variable.
+the build, because Vite copies them into the public JavaScript). Never put the *secret* key (or the old `service_role`
+key) in a `VITE_` variable.
 
 ## Everyday workflow (making changes later)
 
