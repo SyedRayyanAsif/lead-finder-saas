@@ -52,6 +52,32 @@ const PATHS = {
       <path d="M9 22v-4h6v4M8 6h.01M16 6h.01M12 6h.01M12 10h.01M12 14h.01M16 10h.01M16 14h.01M8 10h.01M8 14h.01" />
     </>
   ),
+  copy: (
+    <>
+      <rect width="14" height="14" x="8" y="8" rx="2" ry="2" />
+      <path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2" />
+    </>
+  ),
+  download: (
+    <>
+      <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+      <path d="m7 10 5 5 5-5M12 15V3" />
+    </>
+  ),
+  chevronDown: <path d="m6 9 6 6 6-6" />,
+  arrowLeft: <path d="M19 12H5M12 19l-7-7 7-7" />,
+  externalLink: (
+    <>
+      <path d="M15 3h6v6M10 14 21 3" />
+      <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
+    </>
+  ),
+  sparkles: (
+    <>
+      <path d="M12 3l1.9 5.1L19 10l-5.1 1.9L12 17l-1.9-5.1L5 10l5.1-1.9z" />
+      <path d="M19 3v4M21 5h-4M5 17v4M7 19H3" />
+    </>
+  ),
   arrowRight: <path d="M5 12h14M12 5l7 7-7 7" />,
   menu: <path d="M4 6h16M4 12h16M4 18h16" />,
   close: <path d="M18 6 6 18M6 6l12 12" />,

@@ -46,6 +46,9 @@ export default function Navbar() {
                 buttons don't flash "Log in" for someone who's already in. */}
             {!loading && user && (
               <>
+                <Link to="/requests" className="nav__link">
+                  My requests
+                </Link>
                 <Link to="/request" className="nav__link">
                   New request
                 </Link>

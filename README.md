@@ -40,8 +40,11 @@ This creates two tables:
 1. **Table Editor → `requests`**: new rows show `status = pending`, with the customer's email filled in for you.
 2. Research it on your own machine. (Optional: set `status` to `researching`.)
 3. **Table Editor → `leads` → Insert row** (or **Import data from CSV**). Pick the request with the `request_id` record picker. Only `request_id` and `company_name` are required.
-   Tick `decision_maker_verified` **only** if you confirmed the person and their role.
+   Tick `decision_maker_verified` **only** if you confirmed the person and their role (and the email address, if you entered one).
+   Customers see this as a green *Verified* or amber *Unverified* badge.
 4. Set the request's `status` to **`completed`**. Only now can the customer see the leads (and `completed_at` is stamped for you).
-5. Email the customer (address is in `customer_email`) to say their matches are ready.
+5. Email the customer (address is in `customer_email`) to say their matches are ready. Point them to
+   `https://YOUR-SITE/requests` — they log in and see all their requests there — or straight to
+   `https://YOUR-SITE/requests/<the request's id>`.
 
 Access rules are built in: customers can only create requests and see their own results; they can't edit anything or see anyone else's data.

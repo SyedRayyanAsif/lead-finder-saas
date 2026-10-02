@@ -56,8 +56,8 @@ export default function RequestReceived() {
           <Link to="/request" className="btn btn--ghost">
             Send another request
           </Link>
-          <Link to="/" className="btn btn--primary">
-            Back to home
+          <Link to={`/requests/${id}`} className="btn btn--primary">
+            View this request
           </Link>
         </div>
       </div>

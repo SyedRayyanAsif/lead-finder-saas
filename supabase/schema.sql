@@ -86,7 +86,8 @@ create table if not exists public.leads (
   website                  text,
 
   -- The decision maker. Never guess: if you haven't confirmed the person is
-  -- real and in that role, leave `decision_maker_verified` OFF.
+  -- real and in that role (and that the email address works, if you give one),
+  -- leave `decision_maker_verified` OFF.
   decision_maker_name      text,
   decision_maker_title     text,
   decision_maker_verified  boolean not null default false,
@@ -102,7 +103,7 @@ create table if not exists public.leads (
 
 comment on table  public.leads                          is 'One row per company found for a request. You enter these by hand.';
 comment on column public.leads.request_id               is 'Which request this lead is for. Use the record picker.';
-comment on column public.leads.decision_maker_verified  is 'Tick ONLY if you confirmed this person and their role. Shown to the customer as "Verified" or "Unverified".';
+comment on column public.leads.decision_maker_verified  is 'Tick ONLY if you confirmed this person and their role (and, if you filled in contact_email, that the address is real). Shown to the customer as "Verified" or "Unverified".';
 comment on column public.leads.lead_score               is 'Match quality from 0 to 100.';
 comment on column public.leads.email_subject            is 'Subject line of the drafted outreach email.';
 comment on column public.leads.email_body               is 'Body of the drafted outreach email (plain text).';
