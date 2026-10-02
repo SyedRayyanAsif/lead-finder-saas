@@ -12,12 +12,14 @@
   # Netlify scans the built site for the values of your environment variables
   # and FAILS the deploy if it finds one. Vite deliberately copies every
   # VITE_* variable into the browser bundle, so the two Supabase values below
-  # would always trip it. They're public by design: the anon key is protected
-  # by the Row Level Security rules in supabase/schema.sql, not by secrecy.
+  # would always trip it. They're public by design: the publishable (anon) key
+  # is protected by the Row Level Security rules in supabase/schema.sql, not by
+  # secrecy.
   #
   # Only these two are exempted; scanning stays on for everything else.
-  # NEVER put the Supabase "service_role" key (or any real secret) in a
-  # VITE_ variable - it would be published to every visitor.
+  # NEVER put the Supabase secret key (sb_secret_..., or the old "service_role"
+  # key) or any real secret in a VITE_ variable - it would be published to every
+  # visitor.
   SECRETS_SCAN_OMIT_KEYS = "VITE_SUPABASE_URL,VITE_SUPABASE_ANON_KEY"
 
 # Single-page app: every URL (e.g. /requests/abc, /login) must serve index.html
