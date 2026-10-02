@@ -70,3 +70,20 @@ Netlify needs no manual build configuration.
 `netlify.toml` exempts the two public Supabase variables from Netlify's secret scanner (it would otherwise fail
 the build, because Vite copies them into the public JavaScript). Never put the `service_role` key in a `VITE_`
 variable.
+
+## Everyday workflow (making changes later)
+
+```bash
+git checkout -b my-change        # optional but tidy: work on a branch
+# ...edit files...
+npm run build                    # quick check that it still builds
+git add -A
+git commit -m "Describe what changed"
+git push -u origin my-change     # then open a pull request on GitHub
+```
+
+- Merging a pull request into `main` makes Netlify rebuild and publish automatically.
+- Netlify also builds a private **deploy preview** for each pull request, so you can look before merging.
+  (To let sign-up emails work on previews, add `https://*--YOUR-SITE.netlify.app/**` to Supabase's *Redirect URLs*.)
+- Changed an environment variable in Netlify? Trigger a redeploy — they're baked in at build time.
+- Changed `supabase/schema.sql`? Paste it into the Supabase SQL Editor and run it again (it's safe to re-run).
