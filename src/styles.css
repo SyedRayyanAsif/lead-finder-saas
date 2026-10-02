@@ -1063,3 +1063,104 @@ svg {
     padding: 28px 22px;
   }
 }
+
+/* ==========================================================================
+   Request form & confirmation
+   ========================================================================== */
+.auth__card--wide {
+  max-width: 600px;
+}
+
+.field select {
+  width: 100%;
+  padding: 12px 14px;
+  font: inherit;
+  color: var(--text);
+  background: #fff;
+  border: 1px solid #cbd5e1;
+  border-radius: 10px;
+}
+.field select:focus {
+  outline: none;
+  border-color: var(--brand);
+  box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.2);
+}
+
+.field-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+@media (max-width: 520px) {
+  .field-row {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+}
+
+.form-honest {
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+  margin-top: 18px;
+  padding: 12px 14px;
+  font-size: 0.875rem;
+  color: var(--text-muted);
+  background: var(--bg-tint);
+  border-radius: 10px;
+}
+.form-honest svg {
+  margin-top: 3px;
+  color: var(--brand);
+}
+
+.auth__icon--success {
+  background: var(--green-soft);
+  color: var(--green);
+}
+
+.summary {
+  margin: 24px 0 0;
+  padding: 4px 18px;
+  text-align: left;
+  background: var(--bg-tint);
+  border-radius: 12px;
+}
+.summary > div {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--border);
+}
+.summary > div:last-child {
+  border-bottom: 0;
+}
+.summary dt {
+  flex-shrink: 0;
+  font-size: 0.875rem;
+  color: var(--text-faint);
+}
+.summary dd {
+  margin: 0;
+  font-weight: 600;
+  text-align: right;
+  overflow-wrap: anywhere;
+}
+.summary dd span {
+  font-weight: 400;
+  color: var(--text-muted);
+}
+
+.auth__actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 28px;
+}
+@media (max-width: 480px) {
+  .auth__actions .btn {
+    width: 100%;
+  }
+}

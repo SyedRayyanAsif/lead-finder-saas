@@ -5,7 +5,8 @@ import ScrollToHash from './components/ScrollToHash.jsx'
 import Landing from './pages/Landing.jsx'
 import Login from './pages/Login.jsx'
 import Signup from './pages/Signup.jsx'
-import RequestPlaceholder from './pages/RequestPlaceholder.jsx'
+import RequestForm from './pages/RequestForm.jsx'
+import RequestReceived from './pages/RequestReceived.jsx'
 import ProtectedRoute from './components/ProtectedRoute.jsx'
 import NotFound from './pages/NotFound.jsx'
 
@@ -26,7 +27,15 @@ export default function App() {
             path="/request"
             element={
               <ProtectedRoute>
-                <RequestPlaceholder />
+                <RequestForm />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/request/received"
+            element={
+              <ProtectedRoute>
+                <RequestReceived />
               </ProtectedRoute>
             }
           />

@@ -47,7 +47,7 @@ export default function Navbar() {
             {!loading && user && (
               <>
                 <Link to="/request" className="nav__link">
-                  My request
+                  New request
                 </Link>
                 <button type="button" className="btn btn--ghost btn--sm" onClick={handleLogout}>
                   Log out
