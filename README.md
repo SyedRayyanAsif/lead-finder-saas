@@ -103,6 +103,10 @@ region, which AI tools you use, how long you keep data, which law applies, and s
 until every value is filled in. Have a lawyer review the pages before you rely on them, and update them whenever your
 real practices change (for example, if you add analytics or change the email provider).
 
+The typeface (Inter) is **bundled with the site** via the `@fontsource-variable/inter` package, so visitors' browsers
+never contact Google. If you ever load fonts, analytics, or anything else from another company, add that provider to the
+"Who we share it with" list in the privacy policy.
+
 ## Exporting results (two CSV downloads)
 
 The results page offers two downloads of the same data:

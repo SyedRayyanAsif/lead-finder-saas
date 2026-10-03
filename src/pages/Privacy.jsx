@@ -131,11 +131,6 @@ export default function Privacy() {
           confirmation email when you sign up.
         </li>
         <li>
-          <strong>Google Fonts</strong>, which supplies the typeface used on the site. When a page
-          loads, your browser contacts Google, so Google receives your IP address and browser
-          details.
-        </li>
-        <li>
           <strong>Our email</strong>: when we tell you your results are ready, we send the email
           from <Fill>{LEGAL.emailSender}</Fill>.
         </li>
