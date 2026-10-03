@@ -1,5 +1,5 @@
-// Placeholder brand name – change it here and it updates across the whole site.
-export const SITE_NAME = 'LeadFinder'
+// Brand name: change it here and it updates across the whole site.
+export const SITE_NAME = 'MarketRay'
 
 // The three list sizes a customer can ask for. Shown on the landing page now,
 // and reused by the request form later so the cap is always stated honestly.

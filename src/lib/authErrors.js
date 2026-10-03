@@ -8,7 +8,7 @@ export function friendlyAuthError(error) {
     return 'That email and password don’t match. Please check them and try again.'
   }
   if (code === 'email_not_confirmed' || msg.includes('email not confirmed')) {
-    return 'Please confirm your email first — check your inbox for the link we sent you.'
+    return 'Please confirm your email first. Check your inbox for the link we sent you.'
   }
   if (code === 'weak_password' || msg.includes('password should be')) {
     return 'That password is too weak. Please use at least 8 characters.'

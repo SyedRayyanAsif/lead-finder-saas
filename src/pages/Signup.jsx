@@ -54,7 +54,7 @@ export default function Signup() {
     try {
       const { error: resendError } = await resendConfirmation(sentTo)
       setResendMsg(
-        resendError ? friendlyAuthError(resendError) : 'Sent again — please check your inbox.',
+        resendError ? friendlyAuthError(resendError) : 'Sent again. Please check your inbox.',
       )
     } catch (err) {
       setResendMsg(friendlyAuthError(err))

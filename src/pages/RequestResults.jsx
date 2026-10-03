@@ -96,7 +96,7 @@ export default function RequestResults() {
       <Shell>
         <div className="empty">
           <h1 className="h2">We couldn’t load this just now</h1>
-          <p className="lead">Nothing is lost — please try again.</p>
+          <p className="lead">Nothing is lost. Please try again.</p>
           <button type="button" className="btn btn--primary" onClick={load}>
             Try again
           </button>
@@ -111,7 +111,7 @@ export default function RequestResults() {
         <div className="empty">
           <h1 className="h2">We couldn’t find that request</h1>
           <p className="lead">
-            It may belong to a different account — make sure you’re logged in
+            It may belong to a different account, so make sure you’re logged in
             with the email you used to submit it.
           </p>
           <Link to="/requests" className="btn btn--primary">
@@ -144,7 +144,7 @@ export default function RequestResults() {
               ? 'We’re working through it by hand right now.'
               : 'We’ve received it and will start on it soon.'}{' '}
             We’ll email you at <strong>{user.email}</strong> when your matches
-            are ready — typically within {TURNAROUND} of you sending it.
+            are ready, typically within {TURNAROUND} of you sending it.
             There’s nothing you need to do, and nothing to refresh.
           </p>
           <RequestSummary request={request} />
@@ -206,7 +206,7 @@ export default function RequestResults() {
         </p>
         {count < request.result_count && (
           <p className="results-head__note">
-            You asked for up to {request.result_count} — this is everything we
+            You asked for up to {request.result_count}. This is everything we
             found for this request.
           </p>
         )}
@@ -234,7 +234,7 @@ export default function RequestResults() {
         </p>
         <p className="legend__item">
           <span className="badge badge--unverified">Unverified</span>
-          We couldn’t confirm it — double-check before you reach out.
+          We couldn’t confirm it. Double-check before you reach out.
         </p>
       </aside>
 
