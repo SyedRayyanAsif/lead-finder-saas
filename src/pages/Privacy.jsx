@@ -95,12 +95,21 @@ export default function Privacy() {
         a small service, and handling business contact details as described in section 4); and
         legal obligations. Where we rely on consent, you can withdraw it at any time.
       </p>
-      <p>
-        We use AI-assisted tools to help research companies and draft emails (
-        <Fill>{LEGAL.aiTools}</Fill>), so details from your request may be processed by them. A
-        person reviews each request. We don’t make decisions about you that have legal or similarly
-        significant effects through automated means.
-      </p>
+      {LEGAL.aiTools ? (
+        <p>
+          We use AI-assisted tools to help research companies and draft emails (
+          <Fill>{LEGAL.aiTools}</Fill>), so details from your request may be processed by them. A
+          person reviews each request. We don’t make decisions about you that have legal or
+          similarly significant effects through automated means.
+        </p>
+      ) : (
+        <p>
+          At the moment a person researches and writes everything by hand, and we don’t put your
+          request details into AI tools. If that ever changes, we’ll update this policy first. We
+          don’t make decisions about you that have legal or similarly significant effects through
+          automated means.
+        </p>
+      )}
 
       <h2>4. Information about businesses and people in your results</h2>
       <p>
@@ -132,12 +141,15 @@ export default function Privacy() {
         </li>
         <li>
           <strong>Our email</strong>: when we tell you your results are ready, we send the email
-          from <Fill>{LEGAL.emailSender}</Fill>.
+          from <Fill>{LEGAL.emailSender}</Fill>, so that email provider handles your email address
+          and our message.
         </li>
-        <li>
-          <strong>AI tools</strong> that help with research and drafting, as described in
-          section 3.
-        </li>
+        {LEGAL.aiTools && (
+          <li>
+            <strong>AI tools</strong> that help with research and drafting, as described in
+            section 3.
+          </li>
+        )}
       </ul>
       <p>
         We may also disclose information if the law requires it, or to protect our rights or the
@@ -146,9 +158,11 @@ export default function Privacy() {
 
       <h2>6. Transfers outside your country</h2>
       <p>
-        Some of these providers are based in, or process data in, other countries, including the
-        United States. Where the law requires it, we rely on safeguards such as standard
-        contractual clauses to protect your information.
+        Your account, requests and results are stored in <Fill>{LEGAL.databaseRegion}</Fill>,
+        which may be outside the country where you live. Some of our other providers are also
+        based in, or process data in, other countries, including the United States. Where the law
+        requires it, we put safeguards in place, such as standard contractual clauses, to protect
+        your information.
       </p>
 
       <h2>7. How long we keep it</h2>

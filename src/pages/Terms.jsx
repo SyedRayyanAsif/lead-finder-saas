@@ -93,7 +93,7 @@ export default function Terms() {
       <p>
         You’re responsible for the information in your requests, and you promise you’re allowed to
         share it. You give us permission to use it to provide the service to you, including
-        processing it with the tools described in our Privacy Policy.
+        researching your request and preparing your results, as described in our Privacy Policy.
       </p>
 
       <h2>8. Acceptable use</h2>
