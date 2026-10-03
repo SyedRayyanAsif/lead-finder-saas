@@ -31,8 +31,10 @@ npm run build                # production build into dist/
    - **Early access (the current setup): turn *Confirm email* off** under **Authentication → Sign In / Providers →
      Email**, so people get in straight after signing up. Know the trade-offs: nobody proves they own the address they
      typed (check `customer_email` before you email results), anyone can create an account and submit requests, and
-     there is no password reset (the app has none, and the built-in sender can't reach outsiders anyway), so reset a
-     forgotten password by hand under **Authentication → Users**.
+     there is no password reset (the app has none, and the built-in sender can't reach outsiders anyway). A customer
+     who forgets their password cannot fix it themselves, and the Supabase dashboard may only offer to email them a
+     recovery link, which the built-in sender won't deliver. Set up custom SMTP and add a reset flow before you
+     rely on this.
    - **Later:** add a custom SMTP provider under **Authentication → Emails → SMTP Settings**, then turn
      *Confirm email* back on. The sign-up page already handles either setting.
 
@@ -121,6 +123,11 @@ AI-assisted tools" wording (and lists them under "Who we share it with") by itse
 The typeface (Inter) is **bundled with the site** via the `@fontsource-variable/inter` package, so visitors' browsers
 never contact Google. If you ever load fonts, analytics, or anything else from another company, add that provider to the
 "Who we share it with" list in the privacy policy.
+
+The FAQ (`/faq`, in [`src/pages/Faq.jsx`](src/pages/Faq.jsx)) repeats several things the legal pages say: timing, what
+Verified means, where data is stored, how to delete an account, and the lawful-use warning. It reads the numbers and
+the database region from `src/config.js`, but the wording is written by hand, so re-read it whenever you change the
+legal pages or how the service works.
 
 ## Exporting results (two CSV downloads)
 
