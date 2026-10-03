@@ -14,7 +14,7 @@ export default function Hero() {
           <p className="lead">
             Describe the customers you want to reach. We research real
             companies that match, check who the right person is, and draft an
-            outreach email for each one — delivered as a ready-to-use list.
+            outreach email for each one, delivered as a ready-to-use list.
           </p>
           <div className="hero__actions">
             <Link to="/signup" className="btn btn--primary btn--lg">
@@ -28,7 +28,7 @@ export default function Hero() {
           <p className="hero__note">
             <Icon name="clock" size={16} />
             We’re in early access, so every request is reviewed closely.
-            Results typically arrive within {TURNAROUND} — not instantly.
+            Results typically arrive within {TURNAROUND}, not instantly.
           </p>
         </div>
 

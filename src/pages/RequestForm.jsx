@@ -63,7 +63,7 @@ export default function RequestForm() {
       if (insertError) {
         console.error('[request insert]', insertError)
         setError(
-          'We couldn’t save your request just now. Nothing has been lost — please try again in a moment.',
+          'We couldn’t save your request just now. Nothing has been lost. Please try again in a moment.',
         )
         return
       }
@@ -124,7 +124,7 @@ export default function RequestForm() {
               onChange={set('product_details')}
             />
             <small id="product-hint">
-              What you sell, its price level, any certifications — whatever sets it apart.
+              What you sell, its price level, any certifications, and whatever sets it apart.
             </small>
           </div>
 
@@ -207,7 +207,7 @@ export default function RequestForm() {
               ))}
             </select>
             <small id="count-hint">
-              Each request is capped at {MAX_RESULTS} companies — you can send
+              Each request is capped at {MAX_RESULTS} companies. You can send
               another request any time.
             </small>
           </div>
@@ -226,7 +226,7 @@ export default function RequestForm() {
             <Icon name="clock" size={16} />
             <span>
               We’re in early access and reviewing requests closely, so results
-              typically arrive within {TURNAROUND} — not instantly. We’ll email
+              typically arrive within {TURNAROUND}, not instantly. We’ll email
               you personally when your matches are ready.
             </span>
           </p>

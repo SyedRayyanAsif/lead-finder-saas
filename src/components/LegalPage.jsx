@@ -11,7 +11,7 @@ export function Fill({ children }) {
 export default function LegalPage({ title, children }) {
   useEffect(() => {
     const previous = document.title
-    document.title = `${title} – ${SITE_NAME}`
+    document.title = `${title} | ${SITE_NAME}`
     return () => {
       document.title = previous
     }

@@ -1,5 +1,5 @@
 -- ============================================================================
--- LeadFinder database schema
+-- MarketRay database schema
 --
 -- HOW TO USE: Supabase dashboard -> SQL Editor -> New query -> paste this whole
 -- file -> Run. It is safe to run more than once.

@@ -20,7 +20,7 @@ export default function RequestReceived() {
         <span className="auth__icon auth__icon--success">
           <Icon name="check" size={28} />
         </span>
-        <h1 className="auth__title">Request received — thank you!</h1>
+        <h1 className="auth__title">Request received, thank you!</h1>
         <p className="auth__sub">
           We’re on it. During early access we research each request by hand and
           email you personally at <strong>{user.email}</strong> when your

@@ -15,7 +15,7 @@ const POINTS = [
   {
     icon: 'layers',
     title: 'Capped on purpose',
-    text: `Each request returns ${RESULT_SIZES.slice(0, -1).join(', ')} or ${RESULT_SIZES.at(-1)} companies — never unlimited — so quality stays high.`,
+    text: `Each request returns ${RESULT_SIZES.slice(0, -1).join(', ')} or ${RESULT_SIZES.at(-1)} companies, never unlimited, so quality stays high.`,
   },
 ]
 

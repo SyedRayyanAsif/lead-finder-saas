@@ -10,7 +10,7 @@ export default function Footer() {
           <Logo />
           <p>
             Lead research for businesses entering new markets. Currently in
-            early access – every request is researched by hand.
+            early access, with every request researched by hand.
           </p>
         </div>
         <nav className="footer__links" aria-label="Footer">
