@@ -46,6 +46,15 @@ export function AuthProvider({ children }) {
       signIn: (email, password) =>
         supabase.auth.signInWithPassword({ email, password }),
       signOut: () => supabase.auth.signOut(),
+      // Emails a link that opens /reset-password with a short-lived login.
+      // Like the sign-up link, this URL must be allowed under Supabase >
+      // Authentication > URL Configuration (the `/**` entry already covers it).
+      resetPassword: (email) =>
+        supabase.auth.resetPasswordForEmail(email, {
+          redirectTo: `${window.location.origin}/reset-password`,
+        }),
+      // Only works while someone is logged in, which is what the emailed link gives them.
+      updatePassword: (password) => supabase.auth.updateUser({ password }),
       resendConfirmation: (email) =>
         supabase.auth.resend({
           type: 'signup',

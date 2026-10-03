@@ -1827,3 +1827,17 @@ mark.todo {
     transition: none;
   }
 }
+
+/* Link under the password field on the log-in page. */
+.auth__forgot {
+  margin-top: 8px;
+  font-size: 0.875rem;
+  text-align: right;
+}
+.auth__forgot a {
+  color: var(--brand);
+  font-weight: 500;
+}
+.auth__forgot a:hover {
+  text-decoration: underline;
+}

@@ -1,8 +1,23 @@
+import { LEGAL } from '../config.js'
+
 // Turn Supabase auth errors into plain, friendly sentences for customers.
 export function friendlyAuthError(error) {
   if (!error) return ''
   const code = error.code || ''
   const msg = (error.message || '').toLowerCase()
+
+  // Supabase's built-in email sender only delivers to members of your own Supabase
+  // organization. Until a custom SMTP provider is set up, this is what everyone
+  // else sees when they ask for an email, so point them to a person.
+  if (code === 'email_address_not_authorized' || msg.includes('email address not authorized')) {
+    return `We can’t send email to this address just yet. Please email ${LEGAL.contactEmail} and we’ll help.`
+  }
+  if (code === 'same_password' || msg.includes('different from the old password')) {
+    return 'Your new password needs to be different from your old one.'
+  }
+  if (code === 'session_not_found' || msg.includes('auth session missing')) {
+    return 'This link has expired or was already used. Please request a new one.'
+  }
 
   if (code === 'invalid_credentials' || msg.includes('invalid login credentials')) {
     return 'That email and password don’t match. Please check them and try again.'
