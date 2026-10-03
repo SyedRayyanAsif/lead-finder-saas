@@ -8,6 +8,8 @@ const NAV_LINKS = [
   { to: '/', label: 'Home' },
   { to: '/#how-it-works', label: 'How It Works' },
   { to: '/#pricing', label: 'Pricing' },
+  { to: '/faq', label: 'FAQ' },
+  { to: '/privacy', label: 'Privacy Policy' },
 ]
 
 export default function Navbar() {
