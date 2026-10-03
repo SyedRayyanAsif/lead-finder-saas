@@ -20,10 +20,18 @@ npm run build                # production build into dist/
 3. **Authentication → Providers**: make sure *Email* is enabled.
 4. **Authentication → URL Configuration**: set *Site URL* to your deployed address (e.g. your Netlify URL)
    and add these under *Redirect URLs*: `http://localhost:5173/**` and `https://YOUR-SITE.netlify.app/**`.
-   Confirmation emails send people back to `/request`; if the URL isn't listed, Supabase falls back to the Site URL.
-5. **Email delivery:** Supabase's built-in email sender is for testing only. It is heavily rate-limited and may only
-   deliver to your own team's addresses. Before real customers sign up, add a custom SMTP provider under
-   **Authentication → Emails → SMTP Settings** (or, for private testing only, turn off *Confirm email*).
+   When *Confirm email* is on, the link in the confirmation email sends people back to `/request`; if the URL isn't
+   listed, Supabase falls back to the Site URL.
+5. **Email delivery and *Confirm email*:** Supabase's built-in email sender is for testing only. It is heavily
+   rate-limited and only delivers to members of your Supabase organization, so it can't send a confirmation email to a
+   real customer. Pick one:
+   - **Early access (the current setup): turn *Confirm email* off** under **Authentication → Sign In / Providers →
+     Email**, so people get in straight after signing up. Know the trade-offs: nobody proves they own the address they
+     typed (check `customer_email` before you email results), anyone can create an account and submit requests, and
+     there is no password reset (the app has none, and the built-in sender can't reach outsiders anyway), so reset a
+     forgotten password by hand under **Authentication → Users**.
+   - **Later:** add a custom SMTP provider under **Authentication → Emails → SMTP Settings**, then turn
+     *Confirm email* back on. The sign-up page already handles either setting.
 
 ## Database setup (requests & results)
 
@@ -71,7 +79,7 @@ Netlify needs no manual build configuration.
    "Accounts are temporarily unavailable".
 4. In Supabase → **Authentication → URL Configuration**: set *Site URL* to your Netlify address and add
    `https://YOUR-SITE.netlify.app/**` under *Redirect URLs* (and your custom domain, if you add one).
-5. **Smoke test** on the live site: sign up → confirm the email → submit a request → find it in the Supabase
+5. **Smoke test** on the live site: sign up (and confirm the email, if *Confirm email* is on) → submit a request → find it in the Supabase
    `requests` table → add a lead, set the request to `completed` → reload *My requests* and check the results.
 
 `netlify.toml` exempts the two public Supabase variables from Netlify's secret scanner (it would otherwise fail

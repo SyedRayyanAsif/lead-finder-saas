@@ -136,8 +136,7 @@ export default function Privacy() {
         </li>
         <li>
           <strong>Supabase</strong>, which provides our database and sign-in, and stores your
-          account, requests and results in <Fill>{LEGAL.databaseRegion}</Fill>. It also sends the
-          confirmation email when you sign up.
+          account, requests and results in <Fill>{LEGAL.databaseRegion}</Fill>.
         </li>
         <li>
           <strong>Our email</strong>: when we tell you your results are ready, we send the email
