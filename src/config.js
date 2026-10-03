@@ -35,7 +35,7 @@ export const LEGAL = {
   operatorAddress: '[YOUR POSTAL ADDRESS]', // still to be decided: keeps the Draft banner up
   contactEmail: 'rayyansyed530@gmail.com',
   governingLaw: 'the laws of Turkey',
-  databaseRegion: 'Tokyo, Japan',
+  databaseRegion: 'Frankfurt, Germany',
   emailSender: 'a Gmail address (rayyansyed530@gmail.com)',
   researchSources: 'company websites and public business directories',
   aiTools: '',
