@@ -7,9 +7,11 @@ import Icon from '../components/Icon.jsx'
 const EMPTY = {
   company_name: '',
   industry: '',
+  product_details: '',
   target_customer: '',
   target_country: '',
   target_city: '',
+  extra_notes: '',
   result_count: String(RESULT_SIZES[0]),
 }
 
@@ -25,19 +27,24 @@ export default function RequestForm() {
     e.preventDefault()
     setError('')
 
-    // Trim everything and make sure nothing is blank (whitespace passes `required`).
-    const clean = {
+    // Trim everything and make sure no required field is blank (whitespace
+    // passes the browser's `required` check).
+    const required = {
       company_name: values.company_name.trim(),
       industry: values.industry.trim(),
+      product_details: values.product_details.trim(),
       target_customer: values.target_customer.trim(),
       target_country: values.target_country.trim(),
       target_city: values.target_city.trim(),
       result_count: Number(values.result_count),
     }
-    if (Object.values(clean).some((v) => v === '')) {
-      setError('Please fill in every field so we know exactly who to look for.')
+    if (Object.values(required).some((v) => v === '')) {
+      setError('Please fill in all the required fields so we know exactly who to look for.')
       return
     }
+    // The notes field is optional: only send it when something was typed.
+    const notes = values.extra_notes.trim()
+    const clean = notes ? { ...required, extra_notes: notes } : required
     if (!RESULT_SIZES.includes(clean.result_count)) {
       setError(`Please choose ${RESULT_SIZES.join(', ')} or ${MAX_RESULTS} results.`)
       return
@@ -45,8 +52,8 @@ export default function RequestForm() {
 
     setSubmitting(true)
     try {
-      // Only the six form fields are sent. The owner, status and email are set
-      // by the database itself, so they can't be faked from the browser.
+      // Only the form fields are sent. The owner, status and email are set by
+      // the database itself, so they can't be faked from the browser.
       const { data, error: insertError } = await supabase
         .from('requests')
         .insert(clean)
@@ -105,6 +112,23 @@ export default function RequestForm() {
           </div>
 
           <div className="field">
+            <label htmlFor="product_details">Tell us about your product</label>
+            <textarea
+              id="product_details"
+              required
+              rows={3}
+              maxLength={FIELD_LIMITS.product_details}
+              aria-describedby="product-hint"
+              placeholder="e.g. Finished organic skincare (creams, serums), mid-to-premium price, vegan and cruelty-free certified"
+              value={values.product_details}
+              onChange={set('product_details')}
+            />
+            <small id="product-hint">
+              What you sell, its price level, any certifications — whatever sets it apart.
+            </small>
+          </div>
+
+          <div className="field">
             <label htmlFor="target_customer">Who do you want to find?</label>
             <input
               id="target_customer"
@@ -145,6 +169,26 @@ export default function RequestForm() {
                 onChange={set('target_city')}
               />
             </div>
+          </div>
+
+          <div className="field">
+            <label htmlFor="extra_notes">
+              Anything else that would help us find the right match?{' '}
+              <span className="optional">optional</span>
+            </label>
+            <textarea
+              id="extra_notes"
+              rows={2}
+              maxLength={FIELD_LIMITS.extra_notes}
+              aria-describedby="notes-hint"
+              placeholder="e.g. Orders of 500+ units, independent pharmacies, no large supermarket chains"
+              value={values.extra_notes}
+              onChange={set('extra_notes')}
+            />
+            <small id="notes-hint">
+              For example typical order size, how big the buyer should be, or
+              types of company to skip.
+            </small>
           </div>
 
           <div className="field">

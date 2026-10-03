@@ -28,13 +28,16 @@ npm run build                # production build into dist/
 ## Database setup (requests & results)
 
 1. Supabase dashboard → **SQL Editor** → **New query**.
-2. Paste the whole of [`supabase/schema.sql`](supabase/schema.sql) and click **Run**. It's safe to run again later.
+2. Paste the whole of [`supabase/schema.sql`](supabase/schema.sql) and click **Run**. It's safe to run again later,
+   including on a database created from an earlier version: new columns are added and existing requests and leads
+   are kept. **After updating the schema, run `notify pgrst, 'reload schema';` and update the database *before*
+   deploying a site version that uses the new columns**, otherwise saving a request will fail.
 
 This creates two tables:
 
 | Table | Who fills it | What it holds |
 | --- | --- | --- |
-| `requests` | The customer, via the form | Company, industry, who they want to find, country, city, how many (10/20/50), plus a `status` |
+| `requests` | The customer, via the form | Company, industry, **product details** (what they sell, price level, certifications), who they want to find, country, city, optional **extra notes** (order size, buyer size, companies to skip), how many (10/20/50), plus a `status` |
 | `leads` | **You**, by hand | One row per company you find: name, location, decision maker (+ verified tick), lead score, drafted email |
 
 ### Fulfilling a request by hand (no admin panel needed)

@@ -257,6 +257,18 @@ function RequestSummary({ request }) {
         <dt>How many</dt>
         <dd>Up to {request.result_count} companies</dd>
       </div>
+      {request.product_details && (
+        <div className="summary__long">
+          <dt>Your product</dt>
+          <dd>{request.product_details}</dd>
+        </div>
+      )}
+      {request.extra_notes && (
+        <div className="summary__long">
+          <dt>Extra notes</dt>
+          <dd>{request.extra_notes}</dd>
+        </div>
+      )}
       <div>
         <dt>Sent</dt>
         <dd>{formatDate(request.created_at)}</dd>

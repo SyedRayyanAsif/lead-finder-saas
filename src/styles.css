@@ -1591,3 +1591,46 @@ svg {
     padding: 28px 16px 24px;
   }
 }
+
+/* ==========================================================================
+   Multi-line fields & long answers (product details / notes)
+   ========================================================================== */
+.field textarea {
+  display: block;
+  width: 100%;
+  padding: 12px 14px;
+  font: inherit;
+  line-height: 1.5;
+  color: var(--text);
+  background: #fff;
+  border: 1px solid #cbd5e1;
+  border-radius: 10px;
+  resize: vertical;
+  transition: border-color 0.15s, box-shadow 0.15s;
+}
+.field textarea:hover {
+  border-color: #94a3b8;
+}
+.field textarea:focus {
+  outline: none;
+  border-color: var(--brand);
+  box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.2);
+}
+
+.field .optional {
+  margin-left: 4px;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  color: var(--text-faint);
+}
+
+/* A long free-text answer in the summary card: label above, text below. */
+.summary > .summary__long {
+  flex-direction: column;
+  gap: 4px;
+}
+.summary__long dd {
+  font-weight: 400;
+  text-align: left;
+  white-space: pre-wrap;
+}
