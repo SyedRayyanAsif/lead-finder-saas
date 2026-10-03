@@ -41,6 +41,29 @@ npm run build                # production build into dist/
      password-reset emails reach customers. Then you can turn *Confirm email* back on too. The sign-up page already
      handles either setting.
 
+## Email templates (password reset and sign-up)
+
+Supabase's default emails are plain. Branded versions live in [`supabase/email-templates/`](supabase/email-templates/).
+Supabase does not read them from the repo, so paste them in by hand, and again whenever you change them.
+
+| Template in Supabase | File | Subject line |
+| --- | --- | --- |
+| Reset password | [`reset-password.html`](supabase/email-templates/reset-password.html) | `Reset your MarketRay password` |
+| Confirm sign up | [`confirm-signup.html`](supabase/email-templates/confirm-signup.html) | `Confirm your MarketRay account` |
+
+1. Supabase dashboard → **Authentication → Emails → Templates** → pick the template.
+2. Set the **Subject** and paste the whole file into the **Message body** (the HTML/source view).
+3. Save, then try the real flow: request a password reset for an account whose address is **not** a member of your
+   Supabase organization (for example a `+alias` of your own address), and check the email arrives and the button works.
+   This also proves that custom SMTP is working.
+
+*Confirm sign up* is only sent while *Confirm email* is on. The other templates (invite, magic link, change email,
+reauthentication) are not used by this app, so leave them alone.
+
+Keep in mind: the templates use only Supabase's variables (`{{ .Email }}`, `{{ .ConfirmationURL }}`), load no images and
+include no tracking. Two things are written into them by hand and will not follow `src/config.js`: the contact address
+(`rayyansyed530@gmail.com`) and, in the sign-up email, "within a day or two". Update both templates if either changes.
+
 ## Database setup (requests & results)
 
 1. Supabase dashboard → **SQL Editor** → **New query**.
