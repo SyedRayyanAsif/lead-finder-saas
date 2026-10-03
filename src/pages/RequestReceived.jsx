@@ -22,9 +22,9 @@ export default function RequestReceived() {
         </span>
         <h1 className="auth__title">Request received — thank you!</h1>
         <p className="auth__sub">
-          We’re on it. You’ll get an email at <strong>{user.email}</strong> as
-          soon as your matches are ready. We’re in early access and looking at
-          each request closely, so this typically takes {TURNAROUND}.
+          We’re on it. During early access we research each request by hand and
+          email you personally at <strong>{user.email}</strong> when your
+          matches are ready, typically within {TURNAROUND}.
         </p>
 
         <dl className="summary">

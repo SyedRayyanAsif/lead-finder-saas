@@ -175,8 +175,19 @@ export default function RequestResults() {
     )
   }
 
+  // Standard CSV (commas) works in Google Sheets and for importing into CRMs.
   function handleExport() {
     downloadCsv(csvFilename(request.company_name), leadsToCsv(leads))
+  }
+
+  // Excel only splits columns on the "list separator" of the computer's regional
+  // settings, which is a semicolon in much of Europe. For those people a
+  // comma-separated file lands in a single column, so offer a semicolon version.
+  function handleExportExcel() {
+    downloadCsv(
+      csvFilename(request.company_name, new Date(), '-excel'),
+      leadsToCsv(leads, { delimiter: ';' }),
+    )
   }
 
   return (
@@ -204,6 +215,12 @@ export default function RequestResults() {
             <Icon name="download" size={18} />
             Export to CSV
           </button>
+          <p className="results-head__excel">
+            Opens in a single column in Excel?{' '}
+            <button type="button" className="link-btn" onClick={handleExportExcel}>
+              Download the Excel-friendly version
+            </button>
+          </p>
         </div>
       </header>
 

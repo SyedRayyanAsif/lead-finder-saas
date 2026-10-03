@@ -51,6 +51,8 @@ This creates two tables:
 5. Email the customer (address is in `customer_email`) to say their matches are ready. Point them to
    `https://YOUR-SITE/requests` — they log in and see all their requests there — or straight to
    `https://YOUR-SITE/requests/<the request's id>`.
+6. **Tick `customer_notified`** on the request (`customer_notified_at` fills itself in). To see who still needs an
+   email, filter `requests` by `status` = `completed` and `customer_notified` = `false`.
 
 Access rules are built in: customers can only create requests and see their own results; they can't edit anything or see anyone else's data.
 
@@ -92,3 +94,13 @@ git push -u origin my-change     # then open a pull request on GitHub
   (To let sign-up emails work on previews, add `https://*--YOUR-SITE.netlify.app/**` to Supabase's *Redirect URLs*.)
 - Changed an environment variable in Netlify? Trigger a redeploy — they're baked in at build time.
 - Changed `supabase/schema.sql`? Paste it into the Supabase SQL Editor and run it again (it's safe to re-run).
+
+## Exporting results (two CSV downloads)
+
+The results page offers two downloads of the same data:
+
+- **Export to CSV**: standard comma-separated file. Use it for Google Sheets and for importing into a CRM or outreach tool.
+- **Download the Excel-friendly version**: the same file separated by semicolons. Excel only splits columns on the
+  "list separator" of the computer's regional settings, which is a semicolon in much of Europe (including Germany), so
+  on those machines the standard file lands in a single column. (Email bodies contain line breaks; they are quoted
+  correctly in both files and stay inside one cell.)

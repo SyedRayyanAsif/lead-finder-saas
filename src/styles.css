@@ -1634,3 +1634,9 @@ svg {
   text-align: left;
   white-space: pre-wrap;
 }
+
+.results-head__excel {
+  margin-top: 12px;
+  font-size: 0.875rem;
+  color: var(--text-faint);
+}

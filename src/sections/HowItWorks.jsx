@@ -20,7 +20,7 @@ const STEPS = [
   {
     icon: 'mail',
     title: 'You get a ready list with draft emails',
-    text: `We email you when your list is ready — typically within ${TURNAROUND}. Each company comes with a drafted outreach email you can edit and send.`,
+    text: `We email you personally when your list is ready — typically within ${TURNAROUND}. Each company comes with a drafted outreach email you can edit and send.`,
   },
 ]
 

@@ -227,7 +227,7 @@ export default function RequestForm() {
             <span>
               We’re in early access and reviewing requests closely, so results
               typically arrive within {TURNAROUND} — not instantly. We’ll email
-              you as soon as your matches are ready.
+              you personally when your matches are ready.
             </span>
           </p>
         </form>

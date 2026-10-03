@@ -4,16 +4,21 @@
 // text that begins with one is prefixed with an apostrophe to keep it as text.
 const FORMULA_START = /^[=+\-@\t\r]/
 
-export function csvCell(value) {
+// `delimiter` is the character between cells. Standard CSV uses a comma, but
+// Excel with European regional settings expects a semicolon, so a cell must be
+// quoted when it contains whichever delimiter is in use.
+export function csvCell(value, delimiter = ',') {
   if (value === null || value === undefined) return ''
   let text = String(value)
   if (typeof value === 'string' && FORMULA_START.test(text)) text = `'${text}`
-  if (/[",\r\n]/.test(text)) text = `"${text.replace(/"/g, '""')}"`
+  if (text.includes(delimiter) || /["\r\n]/.test(text)) {
+    text = `"${text.replace(/"/g, '""')}"`
+  }
   return text
 }
 
-export function toCsv(rows) {
-  return rows.map((row) => row.map(csvCell).join(',')).join('\r\n') + '\r\n'
+export function toCsv(rows, delimiter = ',') {
+  return rows.map((row) => row.map((cell) => csvCell(cell, delimiter)).join(delimiter)).join('\r\n') + '\r\n'
 }
 
 // Column order is what the customer sees in Excel/Sheets. There is deliberately
@@ -32,7 +37,7 @@ const HEADER = [
   'Email body',
 ]
 
-export function leadsToCsv(leads) {
+export function leadsToCsv(leads, { delimiter = ',' } = {}) {
   const rows = leads.map((l) => [
     l.company_name,
     l.country,
@@ -46,16 +51,16 @@ export function leadsToCsv(leads) {
     l.email_subject,
     l.email_body,
   ])
-  return toCsv([HEADER, ...rows])
+  return toCsv([HEADER, ...rows], delimiter)
 }
 
-export function csvFilename(companyName, date = new Date()) {
+export function csvFilename(companyName, date = new Date(), suffix = '') {
   const slug = (companyName || '')
     .toLowerCase()
     .replace(/[^a-z0-9]+/g, '-')
     .replace(/^-+|-+$/g, '')
     .slice(0, 40)
-  return `leads-${slug || 'export'}-${date.toISOString().slice(0, 10)}.csv`
+  return `leads-${slug || 'export'}-${date.toISOString().slice(0, 10)}${suffix}.csv`
 }
 
 // Triggers a browser download. The leading BOM makes Excel read accents correctly.

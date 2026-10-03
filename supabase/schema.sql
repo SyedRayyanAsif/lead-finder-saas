@@ -13,7 +13,9 @@
 --      or import a CSV). Pick the request with the `request_id` picker.
 --   4. Set the request's status to 'completed'. The customer can now see the
 --      leads. (Leads stay hidden from them until you do this.)
---   5. Email the customer to tell them their matches are ready.
+--   5. Email the customer to tell them their matches are ready, then tick
+--      `customer_notified` on the request. (Filter requests by status =
+--      completed and customer_notified = false to see who is still waiting.)
 -- ============================================================================
 
 
@@ -66,6 +68,12 @@ alter table public.requests
   add column if not exists extra_notes text
     check (extra_notes is null or char_length(btrim(extra_notes)) between 1 and 1000);
 
+-- Bookkeeping for the manual follow-up email: tick `customer_notified` after you
+-- have emailed the customer, and `customer_notified_at` is stamped for you.
+alter table public.requests
+  add column if not exists customer_notified boolean not null default false,
+  add column if not exists customer_notified_at timestamptz;
+
 comment on table  public.requests                 is 'One row per customer request. Customers create these via the form; you update status.';
 comment on column public.requests.status          is 'pending = just received, researching = you have started, completed = leads entered and visible to the customer.';
 comment on column public.requests.customer_email  is 'Who to email when results are ready. Filled in automatically.';
@@ -74,6 +82,8 @@ comment on column public.requests.product_details is 'What the customer sells: p
 comment on column public.requests.extra_notes     is 'Optional extra detail from the customer: typical order size, size of buyer, companies to skip.';
 comment on column public.requests.result_count    is 'How many companies they asked for. Always 10, 20 or 50.';
 comment on column public.requests.completed_at    is 'Set automatically when status becomes completed.';
+comment on column public.requests.customer_notified    is 'Tick this after you have emailed the customer that their results are ready. Never shown to customers as an action; they cannot change it.';
+comment on column public.requests.customer_notified_at is 'Set automatically when you tick customer_notified. Do not edit.';
 
 create index if not exists requests_user_id_idx on public.requests (user_id);
 create index if not exists requests_status_created_idx on public.requests (status, created_at desc);
@@ -168,9 +178,32 @@ create trigger requests_set_completed_at
   before update on public.requests
   for each row execute function public.set_request_completed_at();
 
+-- Stamp customer_notified_at when you tick customer_notified (and clear it if you
+-- untick it). A date you typed in yourself is kept when you tick the box.
+create or replace function public.set_request_notified_at()
+returns trigger
+language plpgsql
+set search_path = ''
+as $$
+begin
+  if new.customer_notified and not old.customer_notified then
+    new.customer_notified_at := coalesce(new.customer_notified_at, now());
+  elsif not new.customer_notified then
+    new.customer_notified_at := null;
+  end if;
+  return new;
+end
+$$;
+
+drop trigger if exists requests_set_notified_at on public.requests;
+create trigger requests_set_notified_at
+  before update on public.requests
+  for each row execute function public.set_request_notified_at();
+
 -- Trigger functions should never be callable from the public API.
 revoke execute on function public.set_request_customer_email() from public, anon, authenticated;
 revoke execute on function public.set_request_completed_at()   from public, anon, authenticated;
+revoke execute on function public.set_request_notified_at()    from public, anon, authenticated;
 
 
 -- ----------------------------------------------------------------------------
