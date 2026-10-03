@@ -23,20 +23,23 @@ npm run build                # production build into dist/
 3. **Authentication → Providers**: make sure *Email* is enabled.
 4. **Authentication → URL Configuration**: set *Site URL* to your deployed address (e.g. your Netlify URL)
    and add these under *Redirect URLs*: `http://localhost:5173/**` and `https://YOUR-SITE.netlify.app/**`.
-   When *Confirm email* is on, the link in the confirmation email sends people back to `/request`; if the URL isn't
-   listed, Supabase falls back to the Site URL.
+   When *Confirm email* is on, the link in the confirmation email sends people back to `/request`, and the link in a
+   password-reset email opens `/reset-password`. The `/**` entry covers both; if a URL isn't listed, Supabase falls
+   back to the Site URL.
 5. **Email delivery and *Confirm email*:** Supabase's built-in email sender is for testing only. It is heavily
    rate-limited and only delivers to members of your Supabase organization, so it can't send a confirmation email to a
    real customer. Pick one:
    - **Early access (the current setup): turn *Confirm email* off** under **Authentication → Sign In / Providers →
      Email**, so people get in straight after signing up. Know the trade-offs: nobody proves they own the address they
      typed (check `customer_email` before you email results), anyone can create an account and submit requests, and
-     there is no password reset (the app has none, and the built-in sender can't reach outsiders anyway). A customer
-     who forgets their password cannot fix it themselves, and the Supabase dashboard may only offer to email them a
-     recovery link, which the built-in sender won't deliver. Set up custom SMTP and add a reset flow before you
-     rely on this.
-   - **Later:** add a custom SMTP provider under **Authentication → Emails → SMTP Settings**, then turn
-     *Confirm email* back on. The sign-up page already handles either setting.
+     password reset only works for people whose email Supabase can deliver. The app has a "Forgot your password?"
+     page (`/forgot-password`, then `/reset-password`), but the built-in sender can't reach outsiders. A customer who
+     asks for a reset sees "We can't send email to this address just yet" with your contact address, and the FAQ also
+     tells them to email you. Until custom SMTP is set up, you have to help them by hand (the Supabase dashboard may
+     only offer to email a recovery link, so check what it offers; deleting the user also deletes their requests).
+   - **Later:** add a custom SMTP provider under **Authentication → Emails → SMTP Settings**. That is what makes
+     password-reset emails reach customers. Then you can turn *Confirm email* back on too. The sign-up page already
+     handles either setting.
 
 ## Database setup (requests & results)
 

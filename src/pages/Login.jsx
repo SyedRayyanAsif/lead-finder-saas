@@ -68,6 +68,9 @@ export default function Login() {
               onChange={(e) => setPassword(e.target.value)}
               disabled={!isSupabaseConfigured}
             />
+            <p className="auth__forgot">
+              <Link to="/forgot-password">Forgot your password?</Link>
+            </p>
           </div>
 
           {error && (

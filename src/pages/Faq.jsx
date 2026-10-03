@@ -197,8 +197,9 @@ const GROUPS = [
         q: 'I forgot my password. What do I do?',
         a: (
           <p>
-            There’s no automatic password reset yet. Email {email} from the address on your
-            account and we’ll help.
+            On the <Link to="/login">log-in page</Link>, click “Forgot your password?” and enter
+            your email address. We’ll send you a link to choose a new one. If nothing arrives
+            within a few minutes, check your spam folder, then email {email} and we’ll help.
           </p>
         ),
       },
