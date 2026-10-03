@@ -32,7 +32,7 @@ export const FIELD_LIMITS = {
 export const LEGAL = {
   lastUpdated: '3 October 2026',
   operatorName: 'Syed Rayyan Asif',
-  operatorAddress: '[YOUR POSTAL ADDRESS]', // still to be decided: keeps the Draft banner up
+  operatorAddress: 'Ankara, Turkey',
   contactEmail: 'rayyansyed530@gmail.com',
   governingLaw: 'the laws of Turkey',
   databaseRegion: 'Frankfurt, Germany',
