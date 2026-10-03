@@ -10,7 +10,7 @@ const STEPS = [
   {
     icon: 'search',
     title: 'We research real companies',
-    text: 'Our AI-assisted research looks for real companies that fit, and gives each one a score for how good a match it is.',
+    text: 'We research real companies that fit, by hand during early access, and give each one a score for how good a match it is.',
   },
   {
     icon: 'shield',

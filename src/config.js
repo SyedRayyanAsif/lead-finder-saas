@@ -20,3 +20,28 @@ export const FIELD_LIMITS = {
   target_country: 100,
   target_city: 100,
 }
+
+// Facts the privacy policy and terms need from YOU. Anything still starting with
+// "[" shows up highlighted on the legal pages, and while any are left a visible
+// "Draft" banner is shown. Replace each value with the real fact (no brackets).
+//
+// aiTools: leave it as '' (empty) if you do NOT put customers' request details
+// into AI tools. The policy then says so. Name the tools here (e.g.
+// 'Anthropic Claude') the day you start using them, and the policy switches to
+// the "we use AI-assisted tools" wording by itself.
+export const LEGAL = {
+  lastUpdated: '3 October 2026',
+  operatorName: 'Syed Rayyan Asif',
+  operatorAddress: '[YOUR POSTAL ADDRESS]', // still to be decided: keeps the Draft banner up
+  contactEmail: 'rayyansyed530@gmail.com',
+  governingLaw: 'the laws of Turkey',
+  databaseRegion: 'Frankfurt, Germany',
+  emailSender: 'a Gmail address (rayyansyed530@gmail.com)',
+  researchSources: 'company websites and public business directories',
+  aiTools: '',
+  retention: 'until you ask us to delete it',
+}
+
+export const legalHasPlaceholders = Object.values(LEGAL).some(
+  (v) => typeof v === 'string' && v.startsWith('['),
+)

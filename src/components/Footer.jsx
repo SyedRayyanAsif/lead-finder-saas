@@ -18,6 +18,8 @@ export default function Footer() {
           <Link to="/#pricing">Pricing</Link>
           <Link to="/login">Log in</Link>
           <Link to="/signup">Sign up</Link>
+          <Link to="/privacy">Privacy</Link>
+          <Link to="/terms">Terms</Link>
         </nav>
       </div>
       <div className="container footer__legal">
