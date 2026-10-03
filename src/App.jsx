@@ -10,6 +10,8 @@ import RequestReceived from './pages/RequestReceived.jsx'
 import MyRequests from './pages/MyRequests.jsx'
 import RequestResults from './pages/RequestResults.jsx'
 import ProtectedRoute from './components/ProtectedRoute.jsx'
+import Privacy from './pages/Privacy.jsx'
+import Terms from './pages/Terms.jsx'
 import NotFound from './pages/NotFound.jsx'
 
 export default function App() {
@@ -57,6 +59,8 @@ export default function App() {
               </ProtectedRoute>
             }
           />
+          <Route path="/privacy" element={<Privacy />} />
+          <Route path="/terms" element={<Terms />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </main>

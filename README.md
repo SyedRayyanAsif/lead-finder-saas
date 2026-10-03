@@ -95,6 +95,14 @@ git push -u origin my-change     # then open a pull request on GitHub
 - Changed an environment variable in Netlify? Trigger a redeploy — they're baked in at build time.
 - Changed `supabase/schema.sql`? Paste it into the Supabase SQL Editor and run it again (it's safe to re-run).
 
+## Legal pages (privacy policy and terms)
+
+`/privacy` and `/terms` are **drafts**. The facts they need from you (your name and address, contact email, database
+region, which AI tools you use, how long you keep data, which law applies, and so on) live in one place: `LEGAL` in
+[`src/config.js`](src/config.js). Anything still in `[BRACKETS]` is highlighted on the page and a "Draft" banner shows
+until every value is filled in. Have a lawyer review the pages before you rely on them, and update them whenever your
+real practices change (for example, if you add analytics or change the email provider).
+
 ## Exporting results (two CSV downloads)
 
 The results page offers two downloads of the same data:

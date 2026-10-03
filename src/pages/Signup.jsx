@@ -146,6 +146,11 @@ export default function Signup() {
           </button>
         </form>
 
+        <p className="auth__legal">
+          By creating an account you agree to our <Link to="/terms">Terms of Use</Link> and{' '}
+          <Link to="/privacy">Privacy Policy</Link>.
+        </p>
+
         <p className="auth__switch">
           Already have an account? <Link to="/login">Log in</Link>
         </p>
