@@ -55,10 +55,23 @@ create table if not exists public.requests (
                      references auth.users (id) on delete cascade
 );
 
+-- Product specifics, added after the first release. "add column if not exists"
+-- makes this file work on a brand-new project AND on one that already has the
+-- table (plain "create table if not exists" would not add columns to an existing
+-- table). Both are optional at the database level because older requests don't
+-- have them; the request form itself makes product_details required.
+alter table public.requests
+  add column if not exists product_details text
+    check (product_details is null or char_length(btrim(product_details)) between 1 and 1000),
+  add column if not exists extra_notes text
+    check (extra_notes is null or char_length(btrim(extra_notes)) between 1 and 1000);
+
 comment on table  public.requests                 is 'One row per customer request. Customers create these via the form; you update status.';
 comment on column public.requests.status          is 'pending = just received, researching = you have started, completed = leads entered and visible to the customer.';
 comment on column public.requests.customer_email  is 'Who to email when results are ready. Filled in automatically.';
 comment on column public.requests.target_customer is 'Who the customer wants to find, e.g. "distributors" or "importers".';
+comment on column public.requests.product_details is 'What the customer sells: product type, price level, certifications, what sets it apart. Required by the form (older requests may be empty).';
+comment on column public.requests.extra_notes     is 'Optional extra detail from the customer: typical order size, size of buyer, companies to skip.';
 comment on column public.requests.result_count    is 'How many companies they asked for. Always 10, 20 or 50.';
 comment on column public.requests.completed_at    is 'Set automatically when status becomes completed.';
 
@@ -181,7 +194,7 @@ revoke all on public.leads    from anon, authenticated;
 -- Customers may read their requests, and may fill in ONLY the form fields when
 -- creating one (so they can't set their own status, email, owner or dates).
 grant select on public.requests to authenticated;
-grant insert (company_name, industry, target_customer, target_country, target_city, result_count)
+grant insert (company_name, industry, product_details, target_customer, target_country, target_city, extra_notes, result_count)
   on public.requests to authenticated;
 
 grant select on public.leads to authenticated;

@@ -14,6 +14,8 @@ export const TURNAROUND = 'a day or two'
 export const FIELD_LIMITS = {
   company_name: 200,
   industry: 200,
+  product_details: 1000,
+  extra_notes: 1000,
   target_customer: 300,
   target_country: 100,
   target_city: 100,
